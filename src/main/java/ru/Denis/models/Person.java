@@ -3,13 +3,15 @@ package ru.Denis.models;
 public class Person {
     private String fullName;
     private String yearOfBorn;
+    private int person_id;
 
-    private final int id;
+    public Person() {
+    }
 
-    public Person(String fullName, String yearOfBorn, int id) {
+    public Person(String fullName, String yearOfBorn, int person_id) {
         this.fullName = fullName;
         this.yearOfBorn = yearOfBorn;
-        this.id = id;
+        this.person_id = person_id;
     }
 
     public String getFullName() {
@@ -28,7 +30,11 @@ public class Person {
         this.yearOfBorn = yearOfBorn;
     }
 
-    public int getId() {
-        return id;
+    public int getPerson_id() {
+        return person_id;
+    }
+
+    public void setPerson_id(int person_id) {
+        this.person_id = person_id;
     }
 }

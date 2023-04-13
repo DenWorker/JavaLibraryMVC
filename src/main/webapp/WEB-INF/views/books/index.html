@@ -1,10 +1,21 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
+
+<div th:each="book : ${books}">
+    <ul>
+        <li th:text="'ID: ' + ${book.getBook_id()}">user</li>
+        <li th:text="'Название: ' + ${book.getTitle()}">user</li>
+        <li th:text="'Автор: ' + ${book.getAuthor()}">user</li>
+        <li th:text="'Дата выпуска: ' + ${book.getReleaseDate()}">user</li>
+    </ul>
+    <hr>
+</div>
+
 
 </body>
 </html>

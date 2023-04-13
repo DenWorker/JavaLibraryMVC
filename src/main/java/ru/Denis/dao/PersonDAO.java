@@ -17,7 +17,7 @@ public class PersonDAO {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    public List<Person> indexPeople(){
+    public List<Person> index() {
         return jdbcTemplate.query("SELECT * FROM people", new BeanPropertyRowMapper<>(Person.class));
     }
 }

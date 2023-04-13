@@ -5,13 +5,16 @@ public class Book {
     private String author;
     private int releaseDate;
 
-    private int id;
+    private int book_id;
 
-    public Book(String title, String author, int releaseDate, int id) {
+    public Book() {
+    }
+
+    public Book(String title, String author, int releaseDate, int book_id) {
         this.title = title;
         this.author = author;
         this.releaseDate = releaseDate;
-        this.id = id;
+        this.book_id = book_id;
     }
 
     public String getTitle() {
@@ -38,11 +41,11 @@ public class Book {
         this.releaseDate = releaseDate;
     }
 
-    public int getId() {
-        return id;
+    public int getBook_id() {
+        return book_id;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setBook_id(int book_id) {
+        this.book_id = book_id;
     }
 }
