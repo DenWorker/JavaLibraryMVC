@@ -3,10 +3,16 @@ package ru.Denis.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import ru.Denis.dao.PersonDAO;
 import ru.Denis.models.Person;
+
+import javax.validation.Valid;
+
 
 @Controller
 @RequestMapping("/people")
@@ -23,4 +29,17 @@ public class PeopleController {
         model.addAttribute("people", personDAO.index());
         return "people/index";
     }
+
+
+    @GetMapping("/new")
+    public String newPerson(@ModelAttribute("person") Person person) {
+        return "people/new";
+    }
+
+    @PostMapping()
+    public String create(@ModelAttribute("person") Person person) {
+        personDAO.save(person);
+        return "redirect:/people";
+    }
+
 }
