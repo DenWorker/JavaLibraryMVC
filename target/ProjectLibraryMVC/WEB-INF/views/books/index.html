@@ -13,11 +13,16 @@
         <li th:text="'Автор: ' + ${book.getAuthor()}">user</li>
         <li th:text="'Дата выпуска: ' + ${book.getReleaseDate()}">user</li>
     </ul>
+
     <hr>
 </div>
 
 <form th:method="GET" th:action="@{/books/new}">
     <input type="submit" value="Добавить книгу"/>
+</form>
+<br>
+<form th:method="GET" th:action="@{/}">
+    <input type="submit" value="На главное меню"/>
 </form>
 
 </body>
