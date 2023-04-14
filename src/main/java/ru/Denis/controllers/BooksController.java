@@ -1,14 +1,11 @@
 package ru.Denis.controllers;
 
 
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 import ru.Denis.dao.BookDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import ru.Denis.models.Book;
 
 @Controller
@@ -21,12 +18,20 @@ public class BooksController {
         this.bookDAO = bookDAO;
     }
 
+    ///////////////////////////////
     @GetMapping()
     public String index(Model model) {
         model.addAttribute("books", bookDAO.index());
         return "books/index";
     }
 
+    @GetMapping("/{id}")
+    public String show(@PathVariable("id") int id, Model model) {
+        model.addAttribute("book", bookDAO.show(id));
+        return "books/show";
+    }
+
+    ///////////////////////////////
     @GetMapping("/new")
     public String newBook(@ModelAttribute("book") Book book) {
         return "books/new";
@@ -35,6 +40,19 @@ public class BooksController {
     @PostMapping()
     public String create(@ModelAttribute("book") Book book) {
         bookDAO.save(book);
-        return "redirect:books";
+        return "redirect:/books";
+    }
+
+    ///////////////////////////////
+    @GetMapping("/{id}/edit")
+    public String edit(@PathVariable("id") int id, Model model) {
+        model.addAttribute(bookDAO.show(id));
+        return "/books/edit";
+    }
+
+    @PatchMapping("/{id}")
+    public String patch(@ModelAttribute("book") Book book, @PathVariable("id") int id) {
+        bookDAO.update(book, id);
+        return "redirect:/books";
     }
 }
