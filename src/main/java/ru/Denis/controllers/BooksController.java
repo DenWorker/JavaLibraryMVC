@@ -13,6 +13,7 @@ import ru.Denis.models.Book;
 public class BooksController {
     private final BookDAO bookDAO;
 
+
     @Autowired
     public BooksController(BookDAO bookDAO) {
         this.bookDAO = bookDAO;
@@ -28,6 +29,7 @@ public class BooksController {
     @GetMapping("/{id}")
     public String show(@PathVariable("id") int id, Model model) {
         model.addAttribute("book", bookDAO.show(id));
+        model.addAttribute("personOfBook", bookDAO.showPersonOfBook(id));
         return "books/show";
     }
 
@@ -62,4 +64,5 @@ public class BooksController {
         bookDAO.delete(id);
         return "redirect:/books";
     }
+
 }

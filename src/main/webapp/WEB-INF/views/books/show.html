@@ -14,6 +14,13 @@
     <li th:text="'Кто юзает: ' + ${book.getPerson_id()}">VALUE</li>
 </ul>
 
+<br>
+<form th:if="${book.getPerson_id() != null}">
+    <p th:text="'Книга сейчас у: ' + ${personOfBook}">VALUE</p>
+    <input type="submit" value="Освободить книгу"/>
+</form>
+
+<br>
 <hr>
 <form th:method="GET" th:action="@{/books}">
     <input type="submit" value="На страницу книг"/>
