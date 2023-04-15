@@ -55,4 +55,11 @@ public class BooksController {
         bookDAO.update(book, id);
         return "redirect:/books";
     }
+
+    ///////////////////////////////
+    @DeleteMapping("/{id}/delete")
+    public String delete(@PathVariable("id") int id) {
+        bookDAO.delete(id);
+        return "redirect:/books";
+    }
 }

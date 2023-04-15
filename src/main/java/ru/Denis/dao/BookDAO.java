@@ -36,4 +36,8 @@ public class BookDAO {
                 book.getTitle(), book.getAuthor(), book.getReleaseDate(), id);
     }
 
+    public void delete(int id) {
+        jdbcTemplate.update("DELETE FROM books WHERE id = ?", id);
+    }
+
 }
