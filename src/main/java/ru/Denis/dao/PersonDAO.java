@@ -1,5 +1,6 @@
 package ru.Denis.dao;
 
+import ru.Denis.models.Book;
 import ru.Denis.models.Person;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -29,6 +30,11 @@ public class PersonDAO {
     public Person show(int id) {
         return jdbcTemplate.query("SELECT * FROM people WHERE person_id = ?", new Object[]{id},
                 new BeanPropertyRowMapper<>(Person.class)).stream().findFirst().orElse(null);
+    }
+
+    public List<Book> getPersonBooks(int id) {
+        return jdbcTemplate.query("SELECT * FROM books WHERE person_id = ?",
+                new Object[]{id}, new BeanPropertyRowMapper<>(Book.class));
     }
 
     public void update(Person person, int id) {

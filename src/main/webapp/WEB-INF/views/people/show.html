@@ -12,6 +12,20 @@
     <li th:text="'Год рождения: ' + ${person.getYearOfBorn()}">user</li>
 </ul>
 
+<br>
+<h3>Взятые книги:</h3>
+<p th:if="${person_books.isEmpty()}">Человек не взял ни одной книги!</p>
+<div th:each="book : ${person_books}">
+    <ul>
+        <li th:text="'ID книги: ' + ${book.getBook_id()}">user</li>
+        <li th:text="'Название книги: ' + ${book.getTitle()}">user</li>
+        <li th:text="'Автор: ' + ${book.getAuthor()}">user</li>
+        <li th:text="'Дата выпуска: ' + ${book.getReleaseDate()}">user</li>
+    </ul>
+</div>
+
+<hr>
+<br>
 <form th:method="GET" th:action="@{/people}">
     <input type="submit" value="На страницу людей"/>
 </form>
