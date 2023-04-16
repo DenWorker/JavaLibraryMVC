@@ -49,4 +49,8 @@ public class BookDAO {
         jdbcTemplate.update("DELETE FROM books WHERE book_id = ?", id);
     }
 
+    public void toFree(int id) {
+        jdbcTemplate.update("UPDATE books SET person_id = null WHERE book_id = ?", id);
+    }
+
 }

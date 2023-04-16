@@ -15,7 +15,7 @@
 </ul>
 
 <br>
-<form th:if="${book.getPerson_id() != null}">
+<form th:method="PATCH" th:if="${book.getPerson_id() != null}" th:action="@{/books/{id}/free(id=${book.getBook_id()})}">
     <p th:text="'Книга сейчас у: ' + ${personOfBook}">VALUE</p>
     <input type="submit" value="Освободить книгу"/>
 </form>
