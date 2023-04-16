@@ -6,17 +6,21 @@ import ru.Denis.dao.BookDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import ru.Denis.dao.PersonDAO;
 import ru.Denis.models.Book;
+import ru.Denis.models.Person;
 
 @Controller
 @RequestMapping("/books")
 public class BooksController {
     private final BookDAO bookDAO;
+    private final PersonDAO personDAO;
 
 
     @Autowired
-    public BooksController(BookDAO bookDAO) {
+    public BooksController(BookDAO bookDAO, PersonDAO personDAO) {
         this.bookDAO = bookDAO;
+        this.personDAO = personDAO;
     }
 
     ///////////////////////////////
@@ -27,9 +31,11 @@ public class BooksController {
     }
 
     @GetMapping("/{id}")
-    public String show(@PathVariable("id") int id, Model model) {
+    public String show(@PathVariable("id") int id, Model model,
+                       @ModelAttribute("person") Person person) {
         model.addAttribute("book", bookDAO.show(id));
         model.addAttribute("personOfBook", bookDAO.showPersonOfBook(id));
+        model.addAttribute("people", personDAO.index());
         return "books/show";
     }
 
@@ -69,7 +75,13 @@ public class BooksController {
     @PatchMapping("/{id}/free")
     public String toFree(@PathVariable("id") int id) {
         bookDAO.toFree(id);
-        return "redirect:/books";
+        return "redirect:/books/{id}";
+    }
+
+    @PatchMapping("{id}/assignBook")
+    public String assignBook(@PathVariable("id") int book_id, @ModelAttribute("person") Person person) {
+        bookDAO.assignBook(book_id, person.getPerson_id());
+        return "redirect:/books/{id}";
     }
 
 }
