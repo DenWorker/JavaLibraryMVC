@@ -1,14 +1,13 @@
 package ru.Denis.dao;
 
-import org.springframework.jdbc.core.ResultSetExtractor;
 import ru.Denis.models.Book;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
+import ru.Denis.models.Person;
 
 import java.util.List;
-import java.util.Optional;
 
 @Component
 public class BookDAO {
@@ -34,8 +33,10 @@ public class BookDAO {
     }
 
     public String showPersonOfBook(int id) {
-        return jdbcTemplate.queryForObject("SELECT people.fullname from books INNER JOIN people on people.person_id = books.person_id WHERE book_id = ?;",
-                String.class, id);
+        List<Person> result = jdbcTemplate.query("SELECT * from books INNER JOIN people on people.person_id = books.person_id WHERE book_id = ?;",
+                new Object[]{id}, new BeanPropertyRowMapper<>(Person.class));
+
+        return (result.isEmpty()) ? (null) : (result.get(0).getFullName());
     }
 
 
