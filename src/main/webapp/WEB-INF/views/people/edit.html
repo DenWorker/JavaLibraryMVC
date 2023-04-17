@@ -10,11 +10,13 @@
 
     <label for="title">Введите ФИО человека:</label>
     <input type="text" th:field="*{fullName}" id="title"/>
+    <div style="color:red" th:if="${#fields.hasErrors('fullName')}" th:errors="*{fullName}">Name Error</div>
     <br/>
     <br/>
 
     <label for="author">Введите год рождения человека:</label>
     <input type="text" th:field="*{yearOfBorn}" id="author"/>
+    <div style="color:red" th:if="${#fields.hasErrors('yearOfBorn')}" th:errors="*{yearOfBorn}">Name Error</div>
     <br/>
     <br/>
 
