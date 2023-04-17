@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 import ru.Denis.models.Person;
 
 import java.util.List;
+import java.util.Optional;
 
 @Component
 public class BookDAO {
@@ -32,11 +33,9 @@ public class BookDAO {
                 new BeanPropertyRowMapper<>(Book.class)).stream().findFirst().orElse(null);
     }
 
-    public String showPersonOfBook(int id) {
-        List<Person> result = jdbcTemplate.query("SELECT * from books INNER JOIN people on people.person_id = books.person_id WHERE book_id = ?;",
-                new Object[]{id}, new BeanPropertyRowMapper<>(Person.class));
-
-        return (result.isEmpty()) ? (null) : (result.get(0).getFullName());
+    public Optional<Person> showPersonOfBook(int id) {
+        return jdbcTemplate.query("SELECT people.* from books JOIN people on people.person_id = books.person_id WHERE book_id = ?;",
+                new Object[]{id}, new BeanPropertyRowMapper<>(Person.class)).stream().findAny();
     }
 
 

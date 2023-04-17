@@ -14,12 +14,12 @@
 </ul>
 
 <br>
-<form th:method="PATCH" th:if="${book.getPerson_id() != null}" th:action="@{/books/{id}/free(id=${book.getBook_id()})}">
-    <p th:text="'Книга сейчас у: ' + ${personOfBook}">VALUE</p>
+<form th:method="PATCH" th:if="${!personOfBook.isEmpty()}" th:action="@{/books/{id}/free(id=${book.getBook_id()})}">
+    <p th:text="'Книга сейчас у: ' + ${personOfBook.get().getFullName()}">VALUE</p>
     <input type="submit" value="Освободить книгу"/>
 </form>
 
-<form th:method="PATCH" th:if="${book.getPerson_id() == null}"
+<form th:method="PATCH" th:if="${personOfBook.isEmpty()}"
       th:action="@{/books/{id}/assignBook(id=${book.getBook_id()})}">
 
     Эта книга свободна. Кому назначить её?

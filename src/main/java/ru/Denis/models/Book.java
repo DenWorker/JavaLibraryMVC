@@ -14,17 +14,15 @@ public class Book {
 
     private int book_id;
 
-    private Integer person_id;
 
     public Book() {
     }
 
-    public Book(String title, String author, int releaseDate, int book_id, Integer person_id) {
+    public Book(String title, String author, int releaseDate, int book_id) {
         this.title = title;
         this.author = author;
         this.releaseDate = releaseDate;
         this.book_id = book_id;
-        this.person_id = person_id;
     }
 
     public String getTitle() {
@@ -59,11 +57,4 @@ public class Book {
         this.book_id = book_id;
     }
 
-    public Integer getPerson_id() {
-        return person_id;
-    }
-
-    public void setPerson_id(Integer person_id) {
-        this.person_id = person_id;
-    }
 }
