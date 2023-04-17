@@ -1,6 +1,7 @@
 package ru.Denis.controllers;
 
 
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import ru.Denis.dao.BookDAO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,8 @@ import org.springframework.ui.Model;
 import ru.Denis.dao.PersonDAO;
 import ru.Denis.models.Book;
 import ru.Denis.models.Person;
+
+import javax.validation.Valid;
 
 @Controller
 @RequestMapping("/books")
@@ -46,7 +49,13 @@ public class BooksController {
     }
 
     @PostMapping()
-    public String create(@ModelAttribute("book") Book book) {
+    public String create(@ModelAttribute("book") @Valid Book book,
+                         BindingResult bindingResult) {
+
+        if (bindingResult.hasErrors()) {
+            return "books/new";
+        }
+
         bookDAO.save(book);
         return "redirect:/books";
     }
@@ -59,7 +68,13 @@ public class BooksController {
     }
 
     @PatchMapping("/{id}")
-    public String patch(@ModelAttribute("book") Book book, @PathVariable("id") int id) {
+    public String patch(@ModelAttribute("book") @Valid Book book,
+                        BindingResult bindingResult, @PathVariable("id") int id) {
+
+        if (bindingResult.hasErrors()) {
+            return "books/edit";
+        }
+
         bookDAO.update(book, id);
         return "redirect:/books";
     }

@@ -1,8 +1,15 @@
 package ru.Denis.models;
 
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Size;
+
 public class Book {
+    @Size(min = 2, max = 40, message = "Размер названия книги: от 2 до 30!")
     private String title;
+    @Size(min = 2, max = 40, message = "Размер ФИО автора: от 2 до 30!")
     private String author;
+
+    @Max(value = 2023, message = "Год издания не может быть больше 2023 года!")
     private int releaseDate;
 
     private int book_id;
