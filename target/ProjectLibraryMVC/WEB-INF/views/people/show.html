@@ -19,7 +19,7 @@
     <b>Книги:</b>
     <br>
 
-    <table th:each="book : ${person_books}" border="1">
+    <table border="1">
         <colgroup>
             <col span="2" style="background:Khaki">
             <col style="background-color:LightCyan">
@@ -33,12 +33,13 @@
             <th>Дата выпуска</th>
         </tr>
         </thead>
-        <tr>
-            <th th:text="${book.getBook_id()}">value</th>
-            <th th:text="${book.getTitle()}">value</th>
-            <th th:text="${book.getAuthor()}">value</th>
-            <th th:text="${book.getReleaseDate()}">value</th>
-        </tr>
+
+        <tbody th:each="book : ${person_books}">
+        <th th:text="${book.getBook_id()}">value</th>
+        <th th:text="${book.getTitle()}">value</th>
+        <th th:text="${book.getAuthor()}">value</th>
+        <th th:text="${book.getReleaseDate()}">value</th>
+        </tbody>
     </table>
 </div>
 
