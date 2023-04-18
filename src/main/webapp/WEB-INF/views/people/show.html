@@ -11,17 +11,35 @@
     <li th:text="'ID: ' + ${person.getPerson_id()}">user</li>
     <li th:text="'Год рождения: ' + ${person.getYearOfBorn()}">user</li>
 </ul>
-
 <br>
-<h3>Взятые книги:</h3>
+
 <p th:if="${person_books.isEmpty()}">Человек не взял ни одной книги!</p>
-<div th:each="book : ${person_books}">
-    <ul>
-        <li th:text="'ID книги: ' + ${book.getBook_id()}">user</li>
-        <li th:text="'Название книги: ' + ${book.getTitle()}">user</li>
-        <li th:text="'Автор: ' + ${book.getAuthor()}">user</li>
-        <li th:text="'Дата выпуска: ' + ${book.getReleaseDate()}">user</li>
-    </ul>
+<div th:if="${!person_books.isEmpty()}">
+    <hr>
+    <b>Книги:</b>
+    <br>
+
+    <table th:each="book : ${person_books}" border="1">
+        <colgroup>
+            <col span="2" style="background:Khaki">
+            <col style="background-color:LightCyan">
+            <col style="background-color:#9be08e">
+        </colgroup>
+        <thead>
+        <tr>
+            <th>Id книги</th>
+            <th>Название книги</th>
+            <th>Автор книги</th>
+            <th>Дата выпуска</th>
+        </tr>
+        </thead>
+        <tr>
+            <th th:text="${book.getBook_id()}">value</th>
+            <th th:text="${book.getTitle()}">value</th>
+            <th th:text="${book.getAuthor()}">value</th>
+            <th th:text="${book.getReleaseDate()}">value</th>
+        </tr>
+    </table>
 </div>
 
 <hr>
