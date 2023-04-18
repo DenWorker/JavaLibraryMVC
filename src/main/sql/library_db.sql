@@ -26,7 +26,7 @@ create table Books
     title       varchar(100) NOT NULL,
     author      varchar(100) NOT NULL,
     releaseDate int CHECK ( releaseDate > 0 AND releaseDate < 2025),
-    person_id   int REFERENCES People (person_id)
+    person_id   int          REFERENCES People (person_id) ON DELETE SET NULL
 );
 INSERT INTO Books(title, author, releaseDate, person_id)
 VALUES ('Думай', 'Стюарт МакРоберт', 1950, 3);
