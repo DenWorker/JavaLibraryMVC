@@ -24,7 +24,7 @@ public class PersonDAO {
     }
 
     public void save(Person person) {
-        jdbcTemplate.update("INSERT INTO people(fullname, yearOfBorn) VALUES(?,?)",
+        jdbcTemplate.update("INSERT INTO people(fullname, year_Of_Born) VALUES(?,?)",
                 person.getFullName(), person.getYearOfBorn());
     }
 
@@ -34,17 +34,17 @@ public class PersonDAO {
     }
 
     public List<Book> getPersonBooks(int id) {
-        return jdbcTemplate.query("SELECT * FROM books WHERE id = ?",
+        return jdbcTemplate.query("SELECT * FROM books WHERE person_id = ?",
                 new Object[]{id}, new BeanPropertyRowMapper<>(Book.class));
     }
 
     public Optional<Person> getPersonByFullName(String fullName) {
-        return jdbcTemplate.query("SELECT * FROM people WHERE fullName = ?",
+        return jdbcTemplate.query("SELECT * FROM people WHERE fullname = ?",
                 new Object[]{fullName}, new BeanPropertyRowMapper<>(Person.class)).stream().findAny();
     }
 
     public void update(Person person, int id) {
-        jdbcTemplate.update("UPDATE people SET fullname = ?, yearofborn = ? WHERE id = ?",
+        jdbcTemplate.update("UPDATE people SET fullname = ?, year_of_born = ? WHERE id = ?",
                 person.getFullName(), person.getYearOfBorn(), id);
     }
 

@@ -24,7 +24,7 @@ public class BookDAO {
     }
 
     public void save(Book book) {
-        jdbcTemplate.update("INSERT INTO books(title, author, releaseDate) VALUES (?,?,?)",
+        jdbcTemplate.update("INSERT INTO books(title, author, release_date) VALUES (?,?,?)",
                 book.getTitle(), book.getAuthor(), book.getReleaseDate());
     }
 
@@ -34,13 +34,13 @@ public class BookDAO {
     }
 
     public Optional<Person> showPersonOfBook(int id) {
-        return jdbcTemplate.query("SELECT people.* from books JOIN people on people.id = books.id WHERE books.id = ?;",
+        return jdbcTemplate.query("SELECT people.* from books JOIN people on people.id = books.person_id WHERE books.id = ?;",
                 new Object[]{id}, new BeanPropertyRowMapper<>(Person.class)).stream().findAny();
     }
 
 
     public void update(Book book, int id) {
-        jdbcTemplate.update("UPDATE books SET title = ?, author = ?, releasedate = ? WHERE id = ?",
+        jdbcTemplate.update("UPDATE books SET title = ?, author = ?, release_date = ? WHERE id = ?",
                 book.getTitle(), book.getAuthor(), book.getReleaseDate(), id);
     }
 
@@ -49,11 +49,11 @@ public class BookDAO {
     }
 
     public void toFree(int id) {
-        jdbcTemplate.update("UPDATE books SET id = null WHERE id = ?", id);
+        jdbcTemplate.update("UPDATE books SET person_id = null WHERE id = ?", id);
     }
 
     public void assignBook(int book_id, int person_id) {
-        jdbcTemplate.update("UPDATE books SET people.id = ? WHERE books.id = ?", person_id, book_id);
+        jdbcTemplate.update("UPDATE books SET person_id = ? WHERE books.id = ?", person_id, book_id);
     }
 
 }
