@@ -29,31 +29,31 @@ public class BookDAO {
     }
 
     public Book show(int id) {
-        return jdbcTemplate.query("SELECT * FROM books WHERE book_id = ?", new Object[]{id},
+        return jdbcTemplate.query("SELECT * FROM books WHERE books.id = ?", new Object[]{id},
                 new BeanPropertyRowMapper<>(Book.class)).stream().findFirst().orElse(null);
     }
 
     public Optional<Person> showPersonOfBook(int id) {
-        return jdbcTemplate.query("SELECT people.* from books JOIN people on people.person_id = books.person_id WHERE book_id = ?;",
+        return jdbcTemplate.query("SELECT people.* from books JOIN people on people.id = books.id WHERE books.id = ?;",
                 new Object[]{id}, new BeanPropertyRowMapper<>(Person.class)).stream().findAny();
     }
 
 
     public void update(Book book, int id) {
-        jdbcTemplate.update("UPDATE books SET title = ?, author = ?, releasedate = ? WHERE book_id = ?",
+        jdbcTemplate.update("UPDATE books SET title = ?, author = ?, releasedate = ? WHERE id = ?",
                 book.getTitle(), book.getAuthor(), book.getReleaseDate(), id);
     }
 
     public void delete(int id) {
-        jdbcTemplate.update("DELETE FROM books WHERE book_id = ?", id);
+        jdbcTemplate.update("DELETE FROM books WHERE id = ?", id);
     }
 
     public void toFree(int id) {
-        jdbcTemplate.update("UPDATE books SET person_id = null WHERE book_id = ?", id);
+        jdbcTemplate.update("UPDATE books SET id = null WHERE id = ?", id);
     }
 
     public void assignBook(int book_id, int person_id) {
-        jdbcTemplate.update("UPDATE books SET person_id = ? WHERE book_id = ?", person_id, book_id);
+        jdbcTemplate.update("UPDATE books SET people.id = ? WHERE books.id = ?", person_id, book_id);
     }
 
 }

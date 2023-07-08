@@ -11,15 +11,15 @@ public class Person {
     @Min(value = 1920, message = "Год рождения не может быть меньше 1920 года!")
     @Max(value = 2023, message = "Год рождения не может быть больше 2023 года!")
     private int yearOfBorn;
-    private int person_id;
+    private int id;
 
     public Person() {
     }
 
-    public Person(String fullName, int yearOfBorn, int person_id) {
+    public Person(String fullName, int yearOfBorn, int id) {
         this.fullName = fullName;
         this.yearOfBorn = yearOfBorn;
-        this.person_id = person_id;
+        this.id = id;
     }
 
     public String getFullName() {
@@ -38,11 +38,11 @@ public class Person {
         this.yearOfBorn = yearOfBorn;
     }
 
-    public int getPerson_id() {
-        return person_id;
+    public int getId() {
+        return id;
     }
 
-    public void setPerson_id(int person_id) {
-        this.person_id = person_id;
+    public void setId(int id) {
+        this.id = id;
     }
 }

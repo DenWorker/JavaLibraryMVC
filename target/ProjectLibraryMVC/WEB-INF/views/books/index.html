@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>БД книг</title>
@@ -7,9 +7,9 @@
 <body>
 
 <div th:each="book : ${books}">
-    <a th:href="@{/books/{id}(id=${book.getBook_id()})}" th:text="${book.getTitle()}">value</a>
+    <a th:href="@{/books/{id}(id=${book.getId()})}" th:text="${book.getTitle()}">value</a>
     <ul>
-        <li th:text="'ID: ' + ${book.getBook_id()}">user</li>
+        <li th:text="'ID: ' + ${book.getId()}">user</li>
         <li th:text="'Автор: ' + ${book.getAuthor()}">user</li>
         <li th:text="'Дата выпуска: ' + ${book.getReleaseDate()}">user</li>
     </ul>

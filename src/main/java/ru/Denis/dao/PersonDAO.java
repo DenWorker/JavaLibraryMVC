@@ -29,12 +29,12 @@ public class PersonDAO {
     }
 
     public Person show(int id) {
-        return jdbcTemplate.query("SELECT * FROM people WHERE person_id = ?", new Object[]{id},
+        return jdbcTemplate.query("SELECT * FROM people WHERE id = ?", new Object[]{id},
                 new BeanPropertyRowMapper<>(Person.class)).stream().findFirst().orElse(null);
     }
 
     public List<Book> getPersonBooks(int id) {
-        return jdbcTemplate.query("SELECT * FROM books WHERE person_id = ?",
+        return jdbcTemplate.query("SELECT * FROM books WHERE id = ?",
                 new Object[]{id}, new BeanPropertyRowMapper<>(Book.class));
     }
 
@@ -44,12 +44,12 @@ public class PersonDAO {
     }
 
     public void update(Person person, int id) {
-        jdbcTemplate.update("UPDATE people SET fullname = ?, yearofborn = ? WHERE person_id = ?",
+        jdbcTemplate.update("UPDATE people SET fullname = ?, yearofborn = ? WHERE id = ?",
                 person.getFullName(), person.getYearOfBorn(), id);
     }
 
     public void delete(int id) {
-        jdbcTemplate.update("DELETE FROM people WHERE person_id = ?", id);
+        jdbcTemplate.update("DELETE FROM people WHERE id = ?", id);
     }
 
 }

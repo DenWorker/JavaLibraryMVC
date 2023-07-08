@@ -102,7 +102,7 @@ public class BooksController {
 
     @PatchMapping("{id}/assignBook")
     public String assignBook(@PathVariable("id") int book_id, @ModelAttribute("person") Person person) {
-        bookDAO.assignBook(book_id, person.getPerson_id());
+        bookDAO.assignBook(book_id, person.getId());
         return "redirect:/books/" + book_id;
     }
 
